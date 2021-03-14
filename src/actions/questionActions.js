@@ -20,7 +20,6 @@ export const listQuestions = () => async (dispatch, getState) => {
         };
 
         questions.getQuestions().then(function (data) {
-            console.log('data', data)
             dispatch({
                 type: QUESTION_LIST_SUCCESS,
                 payload: data,

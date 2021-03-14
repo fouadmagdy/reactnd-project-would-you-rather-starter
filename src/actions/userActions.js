@@ -1,8 +1,30 @@
-import { USER_LIST_REQUEST, USER_LIST_FAIL, USER_LIST_RESET, USER_LIST_SUCCESS } from '../constants/userConstants'
+import { USER_LIST_REQUEST, USER_LIST_FAIL, USER_LIST_RESET, USER_LIST_SUCCESS, USER_LOGIN_SUCCESS, USER_LOGIN_REQUEST, USER_LOGIN_FAIL } from '../constants/userConstants'
 
 import {
     _getUsers,
 } from '../_DATA'
+
+
+
+export const login = (data) => async (dispatch) => {
+    try {
+        dispatch({
+            type: USER_LOGIN_REQUEST,
+        })
+
+        dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: data,
+        })
+
+        //   localStorage.setItem('userInfo', JSON.stringify(data))
+    } catch (error) {
+        dispatch({
+            type: USER_LOGIN_FAIL,
+            payload: error
+        })
+    }
+}
 
 export const listUsers = () => async (dispatch, getState) => {
     try {
@@ -20,7 +42,6 @@ export const listUsers = () => async (dispatch, getState) => {
         };
 
         users.getUsers().then(function (data) {
-            console.log('data', data)
             dispatch({
                 type: USER_LIST_SUCCESS,
                 payload: data,
