@@ -12,8 +12,8 @@ const App = () => {
       <Header />
       <main>
         <Container className="mt-5">
-          <Route path='/login' component={Login} />
-          <Route path='/' component={DashBoard} exact />
+          <Route path='/dashboard' component={DashBoard} />
+          <Route path='/' component={Login} exact />
         </Container>
       </main>
     </Router>

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Col, Card } from 'react-bootstrap'
 
 const Question = ({ question }) => {
-    console.log('question', question)
 
     return (
         <Col md={4} className="mt-5">

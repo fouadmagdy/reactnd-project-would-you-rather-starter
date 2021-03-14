@@ -11,37 +11,55 @@ const DashBoard = () => {
 
     const userList = useSelector((state) => state.userList)
     const { loading, error, users } = userList
-    console.log('usersxxxx', users)
-
 
     const questionList = useSelector((state) => state.questionList)
     const { loading: loadingQuestion, error: errorQuestion, questions } = questionList
+    // console.log('questionskolo', questions)
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userlogin } = userLogin
-    console.log('userlogin', userlogin)
 
+    const [unAnsweredQuestion, setUnAnsweredQuestion] = useState([])
+    console.log('unAnsweredQuestion', unAnsweredQuestion)
+    const [answeredQuestion, setAnsweredQuestion] = useState([])
+    console.log('answeredQuestion', answeredQuestion)
 
 
 
     useEffect(() => {
         dispatch(listUsers())
         dispatch(listQuestions())
+
+
+        // setAnsweredQuestion(
+        //     Object.keys(users[userlogin].answers).map(qid => qid)
+        // )
+
+
+        // setUnAnsweredQuestion(
+        //     Object.keys(questions).filter(qid => !answeredQuestion.includes(qid))
+        // )
+
     }, [dispatch])
+
+
+
 
     return (
 
         <Tabs defaultActiveKey="unanswered" id="uncontrolled-tab-example">
             <Tab eventKey="unanswered" title="Unanswered">
                 <Row>
-                    {users && users[userlogin]?.questions.map(qId => (
+                    {unAnsweredQuestion && unAnsweredQuestion.map(qId => (
                         questions && <Question key={qId} question={questions[qId]} />
                     ))}
                 </Row>
             </Tab>
             <Tab eventKey="answered" title="Answered">
                 <Row>
-                    <Question />
+                    {answeredQuestion && answeredQuestion.map(qId => (
+                        questions && <Question key={qId} question={questions[qId]} />
+                    ))}
                 </Row>
             </Tab>
         </Tabs>

@@ -1,19 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Col, Button } from 'react-bootstrap'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { login } from '../actions/userActions'
 
 const Login = ({ history }) => {
 
     const dispatch = useDispatch()
-    const userLogin = useSelector((state) => state.userLogin)
-    const { loading, error, userlogin } = userLogin
+
+    const [username, setUsername] = useState('')
 
 
-    const handleLogin = (username) => {
+    const handleSubmit = () => {
         dispatch(login(username))
-        history.push('/')
+        history.push('/dashboard')
     }
 
     return (
@@ -21,7 +21,7 @@ const Login = ({ history }) => {
             <Form.Row>
                 <Form.Group as={Col} controlId="users">
                     <Form.Label>users</Form.Label>
-                    <Form.Control as="select" defaultValue="Choose..." onChange={(e) => handleLogin(e.target.value)}>
+                    <Form.Control as="select" defaultValue="Choose..." onChange={(e) => setUsername(e.target.value)}>
                         <option>Choose...</option>
                         <option value="sarahedo">Sarah Edo</option>
                         <option value="tylermcginnis">Tyler McGinnis</option>
@@ -33,7 +33,7 @@ const Login = ({ history }) => {
 
 
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
                 Submit
             </Button>
         </Form>
