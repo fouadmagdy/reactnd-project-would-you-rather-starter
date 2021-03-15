@@ -1,4 +1,4 @@
-import { QUESTION_LIST_REQUEST, QUESTION_LIST_FAIL, QUESTION_LIST_RESET, QUESTION_LIST_SUCCESS } from '../constants/questionConstants'
+import { QUESTION_LIST_REQUEST, QUESTION_LIST_FAIL, QUESTION_LIST_SUCCESS, QUESTION_ANSWERED_REQUEST, QUESTION_ANSWERED_SUCCESS, QUESTION_ANSWERED_FAIL } from '../constants/questionConstants'
 
 import {
     _getQuestions,
@@ -31,6 +31,28 @@ export const listQuestions = () => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: QUESTION_LIST_FAIL,
+            payload: error
+        })
+    }
+}
+
+
+export const questionAnswered = (data) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: QUESTION_ANSWERED_REQUEST,
+        })
+
+
+        dispatch({
+            type: QUESTION_ANSWERED_SUCCESS,
+            payload: data
+        })
+
+
+    } catch (error) {
+        dispatch({
+            type: QUESTION_ANSWERED_FAIL,
             payload: error
         })
     }

@@ -16,26 +16,23 @@ const DashBoard = () => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userlogin } = userLogin
 
-    const [answeredQuestion, setAnsweredQuestion] = useState([])
-    console.log('answeredQuestion', answeredQuestion)
+    const questionAnswer = useSelector((state) => state.questionAnswer)
+    const { answeres } = questionAnswer
+
 
     const [unAnsweredQuestion, setUnAnsweredQuestion] = useState([])
-    console.log('unAnsweredQuestion', unAnsweredQuestion)
+
 
 
 
 
     useEffect(() => {
 
-        setAnsweredQuestion(
-            Object.keys(users[userlogin].answers).map(qid => qid)
-        )
-
         setUnAnsweredQuestion(
-            Object.keys(questions).filter(qid => !answeredQuestion.includes(qid))
+            Object.keys(questions).filter(qid => !answeres.includes(qid))
         )
 
-    }, [])
+    }, [questions])
 
 
 
@@ -52,7 +49,7 @@ const DashBoard = () => {
             </Tab>
             <Tab eventKey="answered" title="Answered">
                 <Row>
-                    {answeredQuestion && answeredQuestion.map(qId => (
+                    {answeres && answeres.map(qId => (
                         questions && <Question key={qId} question={questions[qId]} />
                     ))}
                 </Row>

@@ -3,7 +3,7 @@ import { Form, Col, Button } from 'react-bootstrap'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { listUsers, login } from '../actions/userActions'
-import { listQuestions } from '../actions/questionActions'
+import { listQuestions, questionAnswered } from '../actions/questionActions'
 
 const Login = ({ history }) => {
 
@@ -15,15 +15,12 @@ const Login = ({ history }) => {
     const { loading, error, users } = userList
 
     const [answeredQuestion, setAnsweredQuestion] = useState([])
-    console.log('answeredQuestion', answeredQuestion)
-
-
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(login(username))
+        dispatch(questionAnswered(answeredQuestion))
+
         history.push('/dashboard')
     }
 
@@ -33,7 +30,14 @@ const Login = ({ history }) => {
         dispatch(listUsers())
         dispatch(listQuestions())
 
-    }, [dispatch])
+        if (username) {
+            setAnsweredQuestion(
+                Object.keys(users[username].answers).map(qid => qid)
+            )
+
+        }
+
+    }, [dispatch, username])
 
 
 
