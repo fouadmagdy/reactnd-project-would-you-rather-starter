@@ -24,13 +24,13 @@ const DashBoard = () => {
 
 
 
-
-
     useEffect(() => {
 
-        setUnAnsweredQuestion(
-            Object.keys(questions).filter(qid => !answeres.includes(qid))
-        )
+        if (questions) {
+            setUnAnsweredQuestion(
+                Object.keys(questions).filter(qid => !answeres.includes(qid))
+            )
+        }
 
     }, [questions])
 
