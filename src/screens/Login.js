@@ -14,6 +14,9 @@ const Login = ({ history }) => {
     const userList = useSelector((state) => state.userList)
     const { loading, error, users } = userList
 
+    const questionList = useSelector((state) => state.questionList)
+    const { questions } = questionList
+
     const [answeredQuestion, setAnsweredQuestion] = useState([])
 
     const handleSubmit = (e) => {
@@ -32,7 +35,7 @@ const Login = ({ history }) => {
 
         if (username) {
             setAnsweredQuestion(
-                Object.keys(users[username].answers).map(qid => qid)
+                Object.keys(users[username].answers).map(qid => qid).sort((a, b) => questions[b].timestamp - questions[a].timestamp)
             )
 
         }
