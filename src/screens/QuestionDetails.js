@@ -31,26 +31,24 @@ const QuestionDetails = ({ match, history }) => {
                 <Card.Header><img /> username </Card.Header>
                 <Card.Body>
                     <Card.Title>Would You Rather</Card.Title>
-                    <Card.Text>
-                        <Form noValidate onSubmit={handleSubmit}>
-                            <Form.Check
-                                type='radio'
-                                id='questionone'
-                                label={questions[id].optionOne.text}
-                                name='answerquestion'
-                                value="optionOne"
-                                onChange={(e) => setCheckBox(e.target.value)}
-                            />
-                            <Form.Check
-                                type='radio'
-                                id='questiontwo'
-                                label={questions[id].optionTwo.text}
-                                name='answerquestion'
-                                value="optionTwo"
-                                onChange={(e) => setCheckBox(e.target.value)}
-                            />
-                        </Form>
-                    </Card.Text>
+                    <Form noValidate onSubmit={handleSubmit}>
+                        <Form.Check
+                            type='radio'
+                            id='questionone'
+                            label={questions[id].optionOne.text}
+                            name='answerquestion'
+                            value="optionOne"
+                            onChange={(e) => setCheckBox(e.target.value)}
+                        />
+                        <Form.Check
+                            type='radio'
+                            id='questiontwo'
+                            label={questions[id].optionTwo.text}
+                            name='answerquestion'
+                            value="optionTwo"
+                            onChange={(e) => setCheckBox(e.target.value)}
+                        />
+                    </Form>
                     <Button variant="primary" disabled={checkBox === ''} onClick={handleSubmit}>Submit</Button>
                 </Card.Body>
             </Card>
