@@ -1,8 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav } from 'react-bootstrap'
 
 const Header = () => {
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userlogin } = userLogin
+
+    const userList = useSelector((state) => state.userList)
+    const { loading, error, users } = userList
+
     return (
         <Navbar bg="light" expand="lg">
             <LinkContainer to='/'>
@@ -13,7 +21,7 @@ const Header = () => {
                 <Nav className="ml-auto">
                     <Nav.Link href="#home">New Question</Nav.Link>
                     <Nav.Link href="#link">LeaderBoard</Nav.Link>
-                    <Nav.Link href="#link">username</Nav.Link>
+                    <Nav.Link href="#link"><img src={users && users[userlogin].avatarURL} className="img-fluid" style={{ width: '30px' }} alt="avatar" /> {userlogin}</Nav.Link>
                     <Nav.Link href="#link">Logout</Nav.Link>
                 </Nav>
 
