@@ -1,7 +1,8 @@
 import React from 'react'
 import { Col, Card } from 'react-bootstrap'
 
-const Question = ({ question }) => {
+const Question = ({ question, userAnswer }) => {
+    console.log('userAnswer', userAnswer)
 
     return (
         <Col md={4} className="mt-5">
@@ -11,8 +12,8 @@ const Question = ({ question }) => {
                         <li>Would You Rather</li>
 
                         <ul>
-                            <li>{question && question.optionOne.text}</li>
-                            <li>{question && question.optionTwo.text}</li>
+                            <li className={userAnswer === 'optionOne' ? 'text-primary' : null}>{question && question.optionOne.text}</li>
+                            <li className={userAnswer === 'optionTwo' ? 'text-primary' : null}>{question && question.optionTwo.text}</li>
                         </ul>
 
                     </ul>

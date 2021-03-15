@@ -50,7 +50,7 @@ const DashBoard = () => {
             <Tab eventKey="answered" title="Answered">
                 <Row>
                     {answeres && answeres.map(qId => (
-                        questions && <Question key={qId} question={questions[qId]} />
+                        questions && <Question key={qId} question={questions[qId]} userAnswer={users[userlogin].answers[qId]} />
                     ))}
                 </Row>
             </Tab>
