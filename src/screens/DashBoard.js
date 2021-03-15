@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Tabs, Tab, Row } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Question from '../components/Question'
-import { listUsers, login } from '../actions/userActions'
-import { listQuestions } from '../actions/questionActions'
+
 
 const DashBoard = () => {
-
-    const dispatch = useDispatch()
 
     const userList = useSelector((state) => state.userList)
     const { loading, error, users } = userList
@@ -19,28 +16,26 @@ const DashBoard = () => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userlogin } = userLogin
 
-    const [unAnsweredQuestion, setUnAnsweredQuestion] = useState([])
-    console.log('unAnsweredQuestion', unAnsweredQuestion)
     const [answeredQuestion, setAnsweredQuestion] = useState([])
     console.log('answeredQuestion', answeredQuestion)
+
+    const [unAnsweredQuestion, setUnAnsweredQuestion] = useState([])
+    console.log('unAnsweredQuestion', unAnsweredQuestion)
+
 
 
 
     useEffect(() => {
-        dispatch(listUsers())
-        dispatch(listQuestions())
 
+        setAnsweredQuestion(
+            Object.keys(users[userlogin].answers).map(qid => qid)
+        )
 
-        // setAnsweredQuestion(
-        //     Object.keys(users[userlogin].answers).map(qid => qid)
-        // )
+        setUnAnsweredQuestion(
+            Object.keys(questions).filter(qid => !answeredQuestion.includes(qid))
+        )
 
-
-        // setUnAnsweredQuestion(
-        //     Object.keys(questions).filter(qid => !answeredQuestion.includes(qid))
-        // )
-
-    }, [dispatch])
+    }, [])
 
 
 

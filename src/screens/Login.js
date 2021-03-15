@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Col, Button } from 'react-bootstrap'
 
-import { useDispatch } from 'react-redux'
-import { login } from '../actions/userActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { listUsers, login } from '../actions/userActions'
+import { listQuestions } from '../actions/questionActions'
 
 const Login = ({ history }) => {
 
@@ -10,11 +11,31 @@ const Login = ({ history }) => {
 
     const [username, setUsername] = useState('')
 
+    const userList = useSelector((state) => state.userList)
+    const { loading, error, users } = userList
 
-    const handleSubmit = () => {
+    const [answeredQuestion, setAnsweredQuestion] = useState([])
+    console.log('answeredQuestion', answeredQuestion)
+
+
+
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
         dispatch(login(username))
         history.push('/dashboard')
     }
+
+
+
+    useEffect(() => {
+        dispatch(listUsers())
+        dispatch(listQuestions())
+
+    }, [dispatch])
+
+
 
     return (
         <Form>
