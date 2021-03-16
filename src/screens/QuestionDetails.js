@@ -3,30 +3,37 @@ import { useDispatch, useSelector } from 'react-redux'
 import { saveQuestions, listQuestions } from '../actions/questionActions'
 import { Col, Card, Button, Form } from 'react-bootstrap'
 
-const QuestionDetails = ({ match, history }) => {
+const QuestionDetails = ({ match }) => {
 
     const id = match.params.id
 
     const dispatch = useDispatch()
 
 
-    const userLogin = useSelector((state) => state.userLogin)
-    const { userlogin } = userLogin
-
     const [checkBox, setCheckBox] = useState('')
+    const [total, setTotal] = useState(0)
 
     const questionList = useSelector((state) => state.questionList)
     const { loading: loadingQuestion, error: errorQuestion, questions } = questionList
 
     const userList = useSelector((state) => state.userList)
     const { loading, error, users } = userList
+    const [showProgress, setShowProgress] = useState(false)
+
+
+
+
+    const calculateTotal = () => {
+        setTotal(questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length);
+    }
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(saveQuestions(userlogin, id, checkBox))
-        dispatch(listQuestions())
-        history.push('/dashboard')
+        // dispatch(saveQuestions(userlogin, id, checkBox))
+        // dispatch(listQuestions())
+        setShowProgress(true)
+        calculateTotal()
     }
 
     return (
@@ -35,7 +42,7 @@ const QuestionDetails = ({ match, history }) => {
                 <Card.Header><img src={users && users[questions[id].author].avatarURL} className="img-fluid" style={{ width: '30px' }} alt="avatar" /> {questions && questions[id].author} </Card.Header>
                 <Card.Body>
                     <Card.Title>Would You Rather</Card.Title>
-                    <Form noValidate onSubmit={handleSubmit}>
+                    <Form noValidate>
                         <Form.Check
                             type='radio'
                             id='questionone'
@@ -53,7 +60,17 @@ const QuestionDetails = ({ match, history }) => {
                             onChange={(e) => setCheckBox(e.target.value)}
                         />
                     </Form>
-                    <Button variant="primary" disabled={checkBox === ''} onClick={handleSubmit}>Submit</Button>
+                    {!showProgress ?
+                        (<Button variant="primary" className="my-3" disabled={checkBox === ''} onClick={handleSubmit}>Submit</Button>) :
+                        (
+                            <>
+                                <p>Number of votes : {total}</p>
+                            </>
+                        )
+                    }
+
+
+
                 </Card.Body>
             </Card>
         </Col>
