@@ -1,4 +1,18 @@
-import { QUESTION_LIST_REQUEST, QUESTION_LIST_FAIL, QUESTION_LIST_SUCCESS, QUESTION_ANSWERED_REQUEST, QUESTION_ANSWERED_SUCCESS, QUESTION_ANSWERED_FAIL, QUESTION_LIST_RESET, SAVE_QUESTION_REQUEST, SAVE_QUESTION_SUCCESS, SAVE_QUESTION_FAIL } from '../constants/questionConstants'
+import {
+    QUESTION_LIST_REQUEST,
+    QUESTION_LIST_FAIL,
+    QUESTION_LIST_SUCCESS,
+    QUESTION_ANSWERED_REQUEST,
+    QUESTION_ANSWERED_SUCCESS,
+    QUESTION_ANSWERED_FAIL,
+    QUESTION_LIST_RESET,
+    SAVE_QUESTION_REQUEST,
+    SAVE_QUESTION_SUCCESS,
+    SAVE_QUESTION_FAIL,
+    NEW_QUESTION_REQUEST,
+    NEW_QUESTION_SUCCESS,
+    NEW_QUESTION_FAIL
+} from '../constants/questionConstants'
 
 
 
@@ -39,6 +53,19 @@ export const saveQuestionsReducer = (state = {}, action) => {
         case SAVE_QUESTION_SUCCESS:
             return { loading: false }
         case SAVE_QUESTION_FAIL:
+            return { loading: false, error: action.payload }
+        default:
+            return state
+    }
+}
+
+export const newQuestionsReducer = (state = {}, action) => {
+    switch (action.type) {
+        case NEW_QUESTION_REQUEST:
+            return { loading: true }
+        case NEW_QUESTION_SUCCESS:
+            return { loading: false }
+        case NEW_QUESTION_FAIL:
             return { loading: false, error: action.payload }
         default:
             return state

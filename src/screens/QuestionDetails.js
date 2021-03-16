@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { saveQuestions } from '../actions/questionActions'
+import { saveQuestions, listQuestions } from '../actions/questionActions'
 import { Col, Card, Button, Form } from 'react-bootstrap'
 
 const QuestionDetails = ({ match, history }) => {
@@ -25,6 +25,7 @@ const QuestionDetails = ({ match, history }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(saveQuestions(userlogin, id, checkBox))
+        dispatch(listQuestions())
         history.push('/dashboard')
     }
 

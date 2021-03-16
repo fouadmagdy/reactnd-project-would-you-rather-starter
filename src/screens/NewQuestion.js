@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { newQuestions, listQuestions } from '../actions/questionActions'
 
 import { Col, Card, Button, Form } from 'react-bootstrap'
 
 
 
-const NewQuestion = () => {
+const NewQuestion = ({ history }) => {
+
+    const dispatch = useDispatch()
 
     const [optionOne, setOptionOne] = useState('')
     const [optionTwo, setOptionTwo] = useState('')
 
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userlogin } = userLogin
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(optionOne, optionTwo)
+        dispatch(newQuestions(userlogin, optionOne, optionTwo))
+        dispatch(listQuestions())
+        history.push('/dashboard')
     }
 
 
@@ -34,7 +43,7 @@ const NewQuestion = () => {
                         </Form.Group>
 
 
-                        <Button type="submit" variant="primary" disabled={optionOne && optionTwo === ''} onClick={handleSubmit}>
+                        <Button type="submit" variant="primary" disabled={optionOne === '' || optionTwo === ''} onClick={handleSubmit}>
                             Submit
                         </Button>
                     </Form>

@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { userListReducer, userLoginReducer } from './reducers/userReducers'
-import { questionListReducer, questionAnsweredReducer, saveQuestionsReducer } from './reducers/questionReduers'
+import { questionListReducer, questionAnsweredReducer, saveQuestionsReducer, newQuestionsReducer } from './reducers/questionReduers'
 
 const reducer = combineReducers({
     userList: userListReducer,
@@ -11,6 +11,7 @@ const reducer = combineReducers({
     userLogin: userLoginReducer,
     questionAnswer: questionAnsweredReducer,
     saveQuestions: saveQuestionsReducer,
+    newQuestions: newQuestionsReducer,
 })
 
 

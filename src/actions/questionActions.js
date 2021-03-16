@@ -1,8 +1,22 @@
-import { QUESTION_LIST_REQUEST, QUESTION_LIST_FAIL, QUESTION_LIST_SUCCESS, QUESTION_ANSWERED_REQUEST, QUESTION_ANSWERED_SUCCESS, QUESTION_ANSWERED_FAIL, SAVE_QUESTION_REQUEST, SAVE_QUESTION_SUCCESS, SAVE_QUESTION_FAIL } from '../constants/questionConstants'
+import {
+    QUESTION_LIST_REQUEST,
+    QUESTION_LIST_FAIL,
+    QUESTION_LIST_SUCCESS,
+    QUESTION_ANSWERED_REQUEST,
+    QUESTION_ANSWERED_SUCCESS,
+    QUESTION_ANSWERED_FAIL,
+    SAVE_QUESTION_REQUEST,
+    SAVE_QUESTION_SUCCESS,
+    SAVE_QUESTION_FAIL,
+    NEW_QUESTION_REQUEST,
+    NEW_QUESTION_SUCCESS,
+    NEW_QUESTION_FAIL
+} from '../constants/questionConstants'
 
 import {
     _getQuestions,
-    _saveQuestionAnswer
+    _saveQuestionAnswer,
+    _saveQuestion
 } from '../_DATA'
 
 export const listQuestions = () => async (dispatch, getState) => {
@@ -93,6 +107,44 @@ export const saveQuestions = (authedUser, qid, answer) => async (dispatch, getSt
     } catch (error) {
         dispatch({
             type: SAVE_QUESTION_FAIL,
+            payload: error
+        })
+    }
+}
+
+
+export const newQuestions = (author, optionOneText, optionTwoText) => async (dispatch, getState) => {
+    const info = {
+        author,
+        optionOneText,
+        optionTwoText
+    };
+    try {
+        dispatch({
+            type: NEW_QUESTION_REQUEST,
+        })
+
+        var questions = {}
+
+        questions.saveQuestions = function () {
+            var promise = new Promise(function (resolve, reject) {
+                resolve(_saveQuestion(info));
+            });
+            return promise;
+        };
+
+        questions.saveQuestions().then(function (data) {
+            dispatch({
+                type: NEW_QUESTION_SUCCESS,
+                payload: data,
+            })
+        });
+
+
+
+    } catch (error) {
+        dispatch({
+            type: NEW_QUESTION_FAIL,
             payload: error
         })
     }
