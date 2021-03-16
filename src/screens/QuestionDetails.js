@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveQuestions, listQuestions } from '../actions/questionActions'
 import { Col, Card, Button, Form } from 'react-bootstrap'
@@ -8,10 +8,13 @@ const QuestionDetails = ({ match }) => {
     const id = match.params.id
 
     const dispatch = useDispatch()
-
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userlogin } = userLogin
 
     const [checkBox, setCheckBox] = useState('')
     const [total, setTotal] = useState(0)
+    const [percOne, setPercOne] = useState(0)
+    const [percTwo, setPercTwo] = useState(0)
 
     const questionList = useSelector((state) => state.questionList)
     const { loading: loadingQuestion, error: errorQuestion, questions } = questionList
@@ -27,14 +30,22 @@ const QuestionDetails = ({ match }) => {
         setTotal(questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length);
     }
 
+    function financial(x) {
+        return Number.parseFloat(x).toFixed(2);
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // dispatch(saveQuestions(userlogin, id, checkBox))
-        // dispatch(listQuestions())
+        dispatch(saveQuestions(userlogin, id, checkBox))
         setShowProgress(true)
         calculateTotal()
     }
+
+    useEffect(() => {
+        setPercOne(financial((questions[id].optionOne.votes.length / total) * 100))
+        setPercTwo(financial((questions[id].optionTwo.votes.length / total) * 100))
+    }, [questions, id, total])
 
     return (
         <Col md={4} className="mt-5">
@@ -64,6 +75,10 @@ const QuestionDetails = ({ match }) => {
                         (<Button variant="primary" className="my-3" disabled={checkBox === ''} onClick={handleSubmit}>Submit</Button>) :
                         (
                             <>
+                                <div className="progress">
+                                    <div className="progress-one bg-primary" style={{ width: `${percOne}%` }}>{`${percOne}%`}</div>
+                                    <div className="progress-two bg-warning" style={{ width: `${percTwo}%` }}>{`${percTwo}%`}</div>
+                                </div>
                                 <p>Number of votes : {total}</p>
                             </>
                         )
