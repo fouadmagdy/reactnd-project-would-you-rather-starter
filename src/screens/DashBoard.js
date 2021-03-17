@@ -1,17 +1,17 @@
+import { waitForElementToBeRemoved } from '@testing-library/dom'
 import React, { useEffect, useState } from 'react'
 import { Tabs, Tab, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import Question from '../components/Question'
 
 
-const DashBoard = () => {
+const DashBoard = ({ history }) => {
 
     const userList = useSelector((state) => state.userList)
     const { loading, error, users } = userList
 
     const questionList = useSelector((state) => state.questionList)
     const { loading: loadingQuestion, error: errorQuestion, questions } = questionList
-    // console.log('questionskolo', questions)
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userlogin } = userLogin
@@ -25,6 +25,13 @@ const DashBoard = () => {
 
 
     useEffect(() => {
+
+        if (!userlogin) {
+            let sign = window.confirm('please sign in first');
+            if (sign) {
+                history.push('/')
+            }
+        }
 
         if (questions) {
             setUnAnsweredQuestion(

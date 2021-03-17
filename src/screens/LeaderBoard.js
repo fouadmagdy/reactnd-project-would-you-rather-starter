@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-const LeaderBoard = () => {
+const LeaderBoard = ({ history }) => {
 
     const userList = useSelector((state) => state.userList)
     const { users } = userList
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userlogin } = userLogin
+
+
     const [sortUser, setsortUser] = useState([])
 
 
     useEffect(() => {
+
+        if (!userlogin) {
+            let sign = window.confirm('please sign in first');
+            if (sign) {
+                history.push('/')
+            }
+        }
 
         const scores = () => {
             setsortUser(Object.values(users).map(user => user).sort((a, b) => (Object.keys(users[b.id].answers).length + users[b.id].questions.length) - (Object.keys(users[a.id].answers).length + users[a.id].questions.length)))

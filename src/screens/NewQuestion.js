@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { newQuestions, listQuestions } from '../actions/questionActions'
 
@@ -22,6 +22,15 @@ const NewQuestion = ({ history }) => {
         dispatch(listQuestions())
         history.push('/dashboard')
     }
+
+    useEffect(() => {
+        if (!userlogin) {
+            let sign = window.confirm('please sign in first');
+            if (sign) {
+                history.push('/')
+            }
+        }
+    }, [])
 
 
 
