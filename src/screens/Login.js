@@ -12,7 +12,7 @@ const Login = ({ history }) => {
     const [username, setUsername] = useState('')
 
     const userList = useSelector((state) => state.userList)
-    const { loading, error, users } = userList
+    const { users } = userList
 
     const questionList = useSelector((state) => state.questionList)
     const { questions } = questionList

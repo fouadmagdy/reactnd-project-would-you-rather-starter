@@ -30,7 +30,7 @@ const NewQuestion = ({ history }) => {
                 history.push('/')
             }
         }
-    }, [])
+    }, [history, userlogin])
 
 
 

@@ -26,7 +26,7 @@ const LeaderBoard = ({ history }) => {
             setsortUser(Object.values(users).map(user => user).sort((a, b) => (Object.keys(users[b.id].answers).length + users[b.id].questions.length) - (Object.keys(users[a.id].answers).length + users[a.id].questions.length)))
         }
         scores()
-    }, [users])
+    }, [users, history, userlogin])
 
     console.log(sortUser)
 

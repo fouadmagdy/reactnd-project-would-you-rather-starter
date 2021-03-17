@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { saveQuestions, listQuestions } from '../actions/questionActions'
+import { saveQuestions } from '../actions/questionActions'
 import { Col, Card, Button, Form } from 'react-bootstrap'
 
 const QuestionDetails = ({ match }) => {
@@ -17,10 +17,10 @@ const QuestionDetails = ({ match }) => {
     const [percTwo, setPercTwo] = useState(0)
 
     const questionList = useSelector((state) => state.questionList)
-    const { loading: loadingQuestion, error: errorQuestion, questions } = questionList
+    const { questions } = questionList
 
     const userList = useSelector((state) => state.userList)
-    const { loading, error, users } = userList
+    const { users } = userList
     const [showProgress, setShowProgress] = useState(false)
 
 
@@ -31,7 +31,7 @@ const QuestionDetails = ({ match }) => {
     }
 
     function financial(x) {
-        return Number.parseFloat(x).toFixed(2);
+        return +Number.parseFloat(x).toFixed(2);
     }
 
 
@@ -43,8 +43,8 @@ const QuestionDetails = ({ match }) => {
     }
 
     useEffect(() => {
-        setPercOne(financial((questions[id].optionOne.votes.length / total) * 100))
-        setPercTwo(financial((questions[id].optionTwo.votes.length / total) * 100))
+        setPercOne(financial((questions[id].optionOne.votes.length / +total) * 100))
+        setPercTwo(financial((questions[id].optionTwo.votes.length / +total) * 100))
     }, [questions, id, total])
 
     return (

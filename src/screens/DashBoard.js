@@ -1,4 +1,3 @@
-import { waitForElementToBeRemoved } from '@testing-library/dom'
 import React, { useEffect, useState } from 'react'
 import { Tabs, Tab, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
@@ -8,10 +7,10 @@ import Question from '../components/Question'
 const DashBoard = ({ history }) => {
 
     const userList = useSelector((state) => state.userList)
-    const { loading, error, users } = userList
+    const { users } = userList
 
     const questionList = useSelector((state) => state.questionList)
-    const { loading: loadingQuestion, error: errorQuestion, questions } = questionList
+    const { questions } = questionList
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userlogin } = userLogin
