@@ -28,8 +28,10 @@ const Header = () => {
                     <LinkContainer to='/new'>
                         <Nav.Link href="#home">New Question</Nav.Link>
                     </LinkContainer>
-                    <Nav.Link href="#link">LeaderBoard</Nav.Link>
-                    <Nav.Link href="#link"><img src={users && users[userlogin].avatarURL} className="img-fluid" style={{ width: '30px' }} alt="avatar" /> {userlogin}</Nav.Link>
+                    <LinkContainer to='/leaderboard'>
+                        <Nav.Link href="#link">LeaderBoard</Nav.Link>
+                    </LinkContainer>
+                    <Nav.Link><img src={users && users[userlogin].avatarURL} className="img-fluid" style={{ width: '30px' }} alt="avatar" /> {userlogin}</Nav.Link>
 
                     <LinkContainer to='/'>
                         <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
