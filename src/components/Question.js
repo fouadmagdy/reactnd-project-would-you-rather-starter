@@ -7,7 +7,7 @@ const Question = ({ question, userAnswer }) => {
 
     return (
         <Col md={4} className="mt-5">
-            <Link to={`questiondetails/${question.id}`}>
+            <Link to={`questiondetails/${question.id}?isAnswered=${userAnswer ? userAnswer : false}`}>
                 <Card>
                     <Card.Body>
                         <ul className="list-unstyled">
