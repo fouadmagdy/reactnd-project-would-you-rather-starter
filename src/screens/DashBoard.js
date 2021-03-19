@@ -25,13 +25,6 @@ const DashBoard = ({ history }) => {
 
     useEffect(() => {
 
-        if (!userlogin) {
-            let sign = window.confirm('please sign in first');
-            if (sign) {
-                history.push('/')
-            }
-        }
-
         if (questions) {
             setUnAnsweredQuestion(
                 Object.keys(questions).filter(qid => !answeres.includes(qid)).sort((a, b) => questions[b].timestamp - questions[a].timestamp)

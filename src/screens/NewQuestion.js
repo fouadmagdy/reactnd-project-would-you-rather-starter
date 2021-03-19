@@ -23,14 +23,6 @@ const NewQuestion = ({ history }) => {
         history.push('/dashboard')
     }
 
-    useEffect(() => {
-        if (!userlogin) {
-            let sign = window.confirm('please sign in first');
-            if (sign) {
-                history.push('/')
-            }
-        }
-    }, [history, userlogin])
 
 
 

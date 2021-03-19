@@ -26,14 +26,14 @@ const Header = () => {
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto">
+                <Nav className={userlogin ? 'ml-auto' : 'ml-auto d-none'}>
                     <LinkContainer to='/new'>
                         <Nav.Link href="#home">New Question</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to='/leaderboard'>
                         <Nav.Link href="#link">LeaderBoard</Nav.Link>
                     </LinkContainer>
-                    <Nav.Link><img src={users && users[userlogin].avatarURL} className="img-fluid" style={{ width: '30px' }} alt="avatar" /> {userlogin}</Nav.Link>
+                    <Nav.Link><img src={users && userlogin && users[userlogin].avatarURL} className="img-fluid" style={{ width: '30px' }} alt="avatar" /> {userlogin && userlogin}</Nav.Link>
 
                     <LinkContainer to='/'>
                         <Nav.Link onClick={handleLogout}>Logout</Nav.Link>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { Col, Card } from 'react-bootstrap'
 
 const Question = ({ question, userAnswer }) => {
-    console.log('userAnswer', userAnswer)
 
     return (
         <Col md={4} className="mt-5">

@@ -8,7 +8,6 @@ const QuestionDetails = ({ match, location }) => {
     const id = match.params.id
 
     const isAnswered = location.search ? location.search.split('=')[1] : false
-    console.log('isAnswered', isAnswered)
 
     const dispatch = useDispatch()
     const userLogin = useSelector((state) => state.userLogin)

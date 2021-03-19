@@ -15,13 +15,6 @@ const LeaderBoard = ({ history }) => {
 
     useEffect(() => {
 
-        if (!userlogin) {
-            let sign = window.confirm('please sign in first');
-            if (sign) {
-                history.push('/')
-            }
-        }
-
         const scores = () => {
             setsortUser(Object.values(users).map(user => user).sort((a, b) => (Object.keys(users[b.id].answers).length + users[b.id].questions.length) - (Object.keys(users[a.id].answers).length + users[a.id].questions.length)))
         }
