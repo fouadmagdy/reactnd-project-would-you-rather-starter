@@ -9,6 +9,7 @@ import QuestionDetails from './screens/QuestionDetails'
 import NewQuestion from './screens/NewQuestion'
 import LeaderBoard from './screens/LeaderBoard'
 import NotFound from './screens/NotFound'
+import NotLogin from './screens/NotLogin'
 
 const App = () => {
 
@@ -18,23 +19,26 @@ const App = () => {
   return (
 
     <Router>
+      <Header />
       <main>
-        <Header />
         <Container className="mt-5">
-          <Switch>
-            {userlogin ? (
-              <>
-                <Route path='/questiondetails/:id' component={QuestionDetails} />
-                <Route path='/leaderboard' component={LeaderBoard} />
-                <Route path='/new' component={NewQuestion} />
-                <Route path='/dashboard' component={DashBoard} />
-              </>
-            ) : (
-              <Route component={Login} exact />
-            )}
-            <Route path='/' component={Login} exact />
-            <Route path='*' component={NotFound} />
-          </Switch>
+
+          {userlogin ? (
+            <Switch>
+              <Route path='/questiondetails/:id' component={QuestionDetails} />
+              <Route path='/leaderboard' component={LeaderBoard} />
+              <Route path='/new' component={NewQuestion} />
+              <Route path='/dashboard' component={DashBoard} />
+              <Route path='/' component={Login} exact />
+              <Route path='*' component={NotFound} />
+            </Switch>
+
+          ) : (
+            <Switch>
+              <Route path='/' component={Login} exact />
+              <Route path='*' component={NotLogin} />
+            </Switch>
+          )}
         </Container>
       </main>
     </Router>

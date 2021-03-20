@@ -21,7 +21,7 @@ const Header = () => {
 
     return (
         <Navbar bg="light" expand="lg">
-            <LinkContainer to={userlogin ? '/dashboard' : '/'}>
+            <LinkContainer to='/'>
                 <Navbar.Brand>Would you Rather</Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

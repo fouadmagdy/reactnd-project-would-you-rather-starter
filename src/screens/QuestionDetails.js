@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { saveQuestions } from '../actions/questionActions'
+import { saveQuestions, listQuestions } from '../actions/questionActions'
+import { listUsers } from '../actions/userActions'
 import { Col, Card, Button, Form } from 'react-bootstrap'
 
 const QuestionDetails = ({ match, location }) => {
@@ -39,9 +40,10 @@ const QuestionDetails = ({ match, location }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(saveQuestions(userlogin, id, checkBox))
         setShowProgress(true)
         calculateTotal()
+        dispatch(saveQuestions(userlogin, id, checkBox))
+        dispatch(listUsers())
     }
 
     useEffect(() => {

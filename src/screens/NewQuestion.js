@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { newQuestions, listQuestions } from '../actions/questionActions'
+import { listUsers } from '../actions/userActions'
 
 import { Col, Card, Button, Form } from 'react-bootstrap'
 
@@ -19,6 +20,7 @@ const NewQuestion = ({ history }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(newQuestions(userlogin, optionOne, optionTwo))
+        dispatch(listUsers())
         dispatch(listQuestions())
         history.push('/dashboard')
     }
