@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Tabs, Tab, Row } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import { listQuestions, questionAnswered } from '../actions/questionActions'
+import { useSelector } from 'react-redux'
 import Question from '../components/Question'
 
 
 const DashBoard = () => {
 
-    const dispatch = useDispatch()
 
     const userList = useSelector((state) => state.userList)
     const { users } = userList
@@ -34,7 +32,7 @@ const DashBoard = () => {
             )
         }
 
-    }, [questions])
+    }, [questions, answeres])
 
 
 

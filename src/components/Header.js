@@ -27,7 +27,7 @@ const Header = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className={userlogin ? 'ml-auto' : 'ml-auto d-none'}>
-                    <LinkContainer to='/new'>
+                    <LinkContainer to='/add'>
                         <Nav.Link href="#home">New Question</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to='/leaderboard'>

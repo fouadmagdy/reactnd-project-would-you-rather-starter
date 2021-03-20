@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { saveQuestions, listQuestions } from '../actions/questionActions'
+import { saveQuestions } from '../actions/questionActions'
 import { listUsers } from '../actions/userActions'
 import { Col, Card, Button, Form } from 'react-bootstrap'
 
@@ -29,9 +29,9 @@ const QuestionDetails = ({ match, location }) => {
 
 
 
-    const calculateTotal = () => {
+    const calculateTotal = useCallback(() => {
         setTotal(questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length);
-    }
+    }, [questions, id])
 
     function financial(x) {
         return +Number.parseFloat(x).toFixed(2);
